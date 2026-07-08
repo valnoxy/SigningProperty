@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.azureSigningRadio = new System.Windows.Forms.RadioButton();
+            this.localCertRadio = new System.Windows.Forms.RadioButton();
             this.certComboBox = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -39,10 +41,14 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.button2 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.dbgLabel = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.button5 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -50,14 +56,44 @@
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.AutoSize = true;
+            this.groupBox1.Controls.Add(this.azureSigningRadio);
+            this.groupBox1.Controls.Add(this.localCertRadio);
             this.groupBox1.Controls.Add(this.certComboBox);
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(3, 5);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(333, 53);
+            this.groupBox1.Size = new System.Drawing.Size(333, 80);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Zertifikat";
+            // 
+            // azureSigningRadio
+            // 
+            this.azureSigningRadio.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.azureSigningRadio.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.azureSigningRadio.Location = new System.Drawing.Point(135, 18);
+            this.azureSigningRadio.Name = "azureSigningRadio";
+            this.azureSigningRadio.Size = new System.Drawing.Size(192, 20);
+            this.azureSigningRadio.TabIndex = 3;
+            this.azureSigningRadio.Text = "Azure Artifact Signing";
+            this.azureSigningRadio.UseVisualStyleBackColor = true;
+            // 
+            // localCertRadio
+            // 
+            this.localCertRadio.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.localCertRadio.Checked = true;
+            this.localCertRadio.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.localCertRadio.Location = new System.Drawing.Point(7, 18);
+            this.localCertRadio.Name = "localCertRadio";
+            this.localCertRadio.Size = new System.Drawing.Size(122, 20);
+            this.localCertRadio.TabIndex = 2;
+            this.localCertRadio.TabStop = true;
+            this.localCertRadio.Text = "Lokales Zertifikat";
+            this.localCertRadio.UseVisualStyleBackColor = true;
             // 
             // certComboBox
             // 
@@ -67,7 +103,7 @@
             this.certComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.certComboBox.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.certComboBox.FormattingEnabled = true;
-            this.certComboBox.Location = new System.Drawing.Point(6, 22);
+            this.certComboBox.Location = new System.Drawing.Point(6, 44);
             this.certComboBox.Name = "certComboBox";
             this.certComboBox.Size = new System.Drawing.Size(321, 23);
             this.certComboBox.TabIndex = 0;
@@ -93,7 +129,7 @@
             this.groupBox2.Controls.Add(this.radioSha256);
             this.groupBox2.Controls.Add(this.radioSha1);
             this.groupBox2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(3, 64);
+            this.groupBox2.Location = new System.Drawing.Point(3, 91);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(333, 53);
             this.groupBox2.TabIndex = 2;
@@ -135,7 +171,7 @@
             this.groupBox4.AutoSize = true;
             this.groupBox4.Controls.Add(this.timestampComboBox);
             this.groupBox4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox4.Location = new System.Drawing.Point(3, 123);
+            this.groupBox4.Location = new System.Drawing.Point(3, 150);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(333, 53);
             this.groupBox4.TabIndex = 3;
@@ -150,8 +186,15 @@
             this.timestampComboBox.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.timestampComboBox.FormattingEnabled = true;
             this.timestampComboBox.Items.AddRange(new object[] {
+            "http://timestamp.acs.microsoft.com",
             "http://time.certum.pl",
-            "http://timestamp.digicert.com"});
+            "http://timestamp.digicert.com",
+            "http://timestamp.comodoca.com",
+            "http://timestamp.globalsign.com",
+            "http://tsa.starfieldtech.com",
+            "http://timestamp.entrust.net/TSS/RFC3161sha2TS",
+            "http://sha256timestamp.ws.symantec.com/sha256/timestamp",
+            "http://tsa.swisssign.net"});
             this.timestampComboBox.Location = new System.Drawing.Point(6, 22);
             this.timestampComboBox.Name = "timestampComboBox";
             this.timestampComboBox.Size = new System.Drawing.Size(321, 23);
@@ -165,7 +208,7 @@
             this.panel1.BackColor = System.Drawing.Color.Transparent;
             this.panel1.Controls.Add(this.button2);
             this.panel1.Controls.Add(this.button1);
-            this.panel1.Location = new System.Drawing.Point(0, 182);
+            this.panel1.Location = new System.Drawing.Point(0, 209);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(339, 29);
             this.panel1.TabIndex = 4;
@@ -180,28 +223,68 @@
             this.button2.TabIndex = 4;
             this.button2.Text = "Digitale Signatur entfernen";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Visible = false;
             this.button2.Click += new System.EventHandler(this.Button2_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.Dock = System.Windows.Forms.DockStyle.Left;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(0, 425);
+            this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(103, 15);
+            this.label1.Size = new System.Drawing.Size(108, 15);
             this.label1.TabIndex = 2;
-            this.label1.Text = "Mit ♥ von valnoxy";
+            this.label1.Text = "  Mit ♥ von valnoxy";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // dbgLabel
+            // 
+            this.dbgLabel.AutoSize = true;
+            this.dbgLabel.Dock = System.Windows.Forms.DockStyle.Left;
+            this.dbgLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dbgLabel.ForeColor = System.Drawing.Color.Red;
+            this.dbgLabel.Location = new System.Drawing.Point(108, 0);
+            this.dbgLabel.Name = "dbgLabel";
+            this.dbgLabel.Size = new System.Drawing.Size(45, 15);
+            this.dbgLabel.TabIndex = 5;
+            this.dbgLabel.Text = "Debug ";
+            this.dbgLabel.Visible = false;
+            // 
+            // panel2
+            // 
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.AutoSize = true;
+            this.panel2.BackColor = System.Drawing.Color.Transparent;
+            this.panel2.Controls.Add(this.button5);
+            this.panel2.Controls.Add(this.dbgLabel);
+            this.panel2.Controls.Add(this.label1);
+            this.panel2.Location = new System.Drawing.Point(0, 244);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(339, 29);
+            this.panel2.TabIndex = 7;
+            // 
+            // button5
+            // 
+            this.button5.Dock = System.Windows.Forms.DockStyle.Right;
+            this.button5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button5.Location = new System.Drawing.Point(237, 0);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(102, 29);
+            this.button5.TabIndex = 5;
+            this.button5.Text = "Einstellungen";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button3_Click);
             // 
             // PropertyPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(249)))), ((int)(((byte)(249)))));
+            this.BackColor = System.Drawing.Color.Transparent;
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.groupBox1);
             this.Name = "PropertyPage";
             this.Size = new System.Drawing.Size(339, 447);
@@ -209,6 +292,8 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -226,5 +311,10 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label dbgLabel;
+        private System.Windows.Forms.RadioButton azureSigningRadio;
+        private System.Windows.Forms.RadioButton localCertRadio;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Button button5;
     }
 }
