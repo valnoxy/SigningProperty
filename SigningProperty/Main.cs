@@ -34,6 +34,7 @@ namespace SigningProperty
                     case ".appxbundle":
                     case ".sys":
                     case ".ocx":
+                    case ".com":
                         return true;
                     default:
                         return false;

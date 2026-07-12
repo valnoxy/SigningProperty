@@ -120,14 +120,16 @@ namespace SigningProperty
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            string certificateThumbprint, timestampUrl = null;
+            var certificateThumbprint = string.Empty;
+            var timestampUrl = string.Empty;
+            
             if (!string.IsNullOrEmpty(timestampComboBox.Text))
                 timestampUrl = "/tr " + timestampComboBox.Text;
             if (certComboBox.SelectedItem is Certificate selectedCertificate)
             {
                 certificateThumbprint = selectedCertificate.Thumbprint;
             }
-            else
+            else if (!azureSigningRadio.Checked)
             {
                 const string messageText = @"Dieses Zertifikat besitzt kein gültigen Thumbprint.";
                 MessageBox.Show(messageText, @"Windows-Explorer", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -137,6 +139,13 @@ namespace SigningProperty
             var extension = Path.GetExtension(SelectedItemPath);
             if (extension == ".rdp") 
             {
+                if (azureSigningRadio.Checked)
+                {
+                    const string messageText = @"RDP-Dateien können nicht mit einem Azure Code Signing Zertifikat signiert werden.";
+                    MessageBox.Show(messageText, @"Windows-Explorer", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                
                 var fullPath = FindRdpSign();
                 if (fullPath == null)
                 {
@@ -391,7 +400,7 @@ namespace SigningProperty
                     ? "✅ Die Azure CodeSigning Bibliothek wurde gefunden."
                     : "❎ Die Azure CodeSigning Bibliothek wurde nicht gefunden.";
 
-            var messageText = $"SigningProperty\nVersion: 1.1\n\n{signToolExistsMessage}\n{rdpSignExistsMessage}\n{azureSignLibExistsMessage}";
+            var messageText = $"SigningProperty\nVersion: 1.2\n\n{signToolExistsMessage}\n{rdpSignExistsMessage}\n{azureSignLibExistsMessage}";
             MessageBox.Show(messageText, messageTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
